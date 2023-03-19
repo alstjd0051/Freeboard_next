@@ -3,22 +3,37 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
-// Less code
 // Better validation
 // Better Errors(set,clear,display)
 // Have contorl over inputs
-// Dont deal with evetnts
-// Easier Inputs
 
 type Props = {};
 
 const Forms = () => {
-  const { register, watch } = useForm();
+  const { register, handleSubmit } = useForm();
+  const onValid = () => {
+    console.log("Hello");
+  };
   return (
-    <form className="flex flex-col">
-      <input {...register("username")} type="text" placeholder="Username" />
-      <input {...register("email")} type="email" placeholder="Email" />
-      <input {...register("password")} type="password" placeholder="Password" />
+    <form
+      onSubmit={handleSubmit(onValid)}
+      className="flex flex-col w-80 m-auto py-5 gap-2 border bg-gray-400 space-y-5  "
+    >
+      <input
+        {...register("username", { required: true })}
+        type="text"
+        placeholder="Username"
+      />
+      <input
+        {...register("email", { required: true })}
+        type="email"
+        placeholder="Email"
+      />
+      <input
+        {...register("password", { required: true })}
+        type="password"
+        placeholder="Password"
+      />
       <input type="submit" value="Create Account" />
     </form>
   );

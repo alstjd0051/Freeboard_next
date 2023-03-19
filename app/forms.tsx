@@ -12,7 +12,7 @@ import { useForm } from "react-hook-form";
 
 type Props = {};
 
-const Forms = (props: Props) => {
+const Forms = () => {
   const { register, watch } = useForm();
   return (
     <form className="flex flex-col">

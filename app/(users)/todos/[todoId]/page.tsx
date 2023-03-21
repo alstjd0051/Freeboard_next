@@ -1,4 +1,4 @@
-import { Todo } from "@/app/typing";
+import { Todo } from "@/typing";
 import React from "react";
 import { notFound } from "next/navigation";
 

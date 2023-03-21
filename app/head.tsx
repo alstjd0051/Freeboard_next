@@ -3,7 +3,7 @@ import React from "react";
 const head = () => {
   return (
     <>
-      <title>Next13</title>
+      <title>TylerSong - website</title>
     </>
   );
 };

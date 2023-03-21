@@ -6,8 +6,7 @@ type Props = {};
 const Todos = (props: Props) => {
   return (
     <div>
-      {/* @ts-ignore */}
-      <TodosList />
+      <h1>This is where the Todos will be listed</h1>
     </div>
   );
 };

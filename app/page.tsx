@@ -1,5 +1,3 @@
-import Forms from "./forms";
-
 export default function Home() {
   return (
     <main>

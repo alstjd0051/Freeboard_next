@@ -64,7 +64,10 @@ const EnterPage: NextPage = (props: Props) => {
             </div>
           </div>
           <form className="flex flex-col mt-8">
-            <label className="text-sm font-medium text-gray-700  ">
+            <label
+              htmlFor="input"
+              className="text-sm font-medium text-gray-700  "
+            >
               {method === "email" ? "Email address" : null}
               {method === "phone" ? "Phone number" : null}
               {method === "board" ? "Welcome to BoardPage" : null}
@@ -72,6 +75,7 @@ const EnterPage: NextPage = (props: Props) => {
             <div className="mt-1">
               {method === "email" ? (
                 <input
+                  id="input"
                   type="email"
                   className="appearance-none w-full px-3 py-2 border border-gray-300 shadow-sm rounded-md placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 "
                   required
@@ -83,6 +87,7 @@ const EnterPage: NextPage = (props: Props) => {
                     +82
                   </span>
                   <input
+                    id="input"
                     className="py-2 px-4 border border-transparent appearance-none w-full rounded-l-none border-gray-300 shadow-sm rounded-md placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
                     type="number"
                     required

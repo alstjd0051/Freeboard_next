@@ -16,10 +16,10 @@ const Header = (props: Props) => {
         Form
       </Link>
       <Link
-        href={"/search"}
+        href={"/enter"}
         className="px-2 py-1 bg-white text-blue-500 rounded-lg"
       >
-        Search
+        Enter
       </Link>
     </header>
   );

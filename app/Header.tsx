@@ -10,10 +10,10 @@ const Header = (props: Props) => {
         Home
       </Link>
       <Link
-        href={"/todos"}
+        href={"/form"}
         className="px-2 py-1 bg-white text-blue-500 rounded-lg"
       >
-        Todos
+        Form
       </Link>
       <Link
         href={"/search"}

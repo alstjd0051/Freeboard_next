@@ -27,20 +27,33 @@ const FormPage = () => {
           {...register("username", {
             required: "username is required",
             minLength: {
-              message: "the username should be longere than 5 chart",
-              value: 5,
+              message: "3글자이상 입력해주세요",
+              value: 3,
             },
           })}
           type="text"
           placeholder="UserName"
         />{" "}
         <input
-          {...register("email", { required: "email is required" })}
+          {...register("email", {
+            required: "email is required",
+            validate: {
+              notGmail: (value) =>
+                (value.includes(".com") || "mail을 입력해주세요") &&
+                (!value.includes("gmail.com") || "Gmail은 입력안됩니다."),
+            },
+          })}
           type="email"
           placeholder="Email"
         />
         <input
-          {...register("password", { required: "password is required" })}
+          {...register("password", {
+            required: "password is required",
+            minLength: {
+              message: "너무짧습니다 최소 8글자이상",
+              value: 8,
+            },
+          })}
           type="password"
           placeholder="Password"
         />

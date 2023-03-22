@@ -2,22 +2,30 @@
 
 import React, { useState } from "react";
 import { FieldErrors, useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 interface LoginForm {
   email: string;
   password: string;
   username: string;
+  error: string;
 }
 
 const FormPage = () => {
   const {
     register,
     handleSubmit,
+    setError,
+    reset,
     formState: { errors },
   } = useForm<LoginForm>({
     mode: "onChange",
   });
-  const onValid = (data: LoginForm) => {};
+  const router = useRouter();
+  const onValid = (data: LoginForm) => {
+    setError("error", { message: "서버와 연결이 끊어졌습니다." });
+    reset();
+  };
   const onInvalid = (error: FieldErrors) => {
     console.log(error);
   };
@@ -89,6 +97,7 @@ const FormPage = () => {
           type="submit"
           value={"Create Account"}
         />
+        <p className="">{errors.error?.message}</p>
       </form>
     </div>
   );

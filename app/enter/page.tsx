@@ -1,5 +1,8 @@
 "use client";
-import { cls } from "@/components/commons/libs/utils";
+import Button from "@/components/commons/items/button";
+import Input from "@/components/commons/items/input";
+import useMutation from "@/components/commons/libs/client/useMutation";
+import { cls } from "@/components/commons/libs/client/utils";
 import { NextPage } from "next";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -12,11 +15,21 @@ interface EnterFormn {
 }
 
 const EnterPage: NextPage = (props: Props) => {
-  const { register } = useForm<EnterFormn>();
-  const [method, setMethod] = useState<"email" | "phone" | "board">("email");
-  const onEmailClick = () => setMethod("email");
-  const onPhoneClick = () => setMethod("phone");
-  const onBoardClick = () => setMethod("board");
+  const [enter, { loading, data, error }] = useMutation("/api/users/enter");
+  const [submittion, setSubmittion] = useState(false);
+  const { register, reset, handleSubmit } = useForm<EnterFormn>();
+  const [method, setMethod] = useState<"email" | "phone">("email");
+  const onEmailClick = () => {
+    reset();
+    setMethod("email");
+  };
+  const onPhoneClick = () => {
+    reset();
+    setMethod("phone");
+  };
+  const onValid = (data: EnterFormn) => {
+    enter(data);
+  };
   return (
     <div className="h-screen  ">
       <div className="mt-16 px-4 w-1/2 mx-auto ">
@@ -24,7 +37,7 @@ const EnterPage: NextPage = (props: Props) => {
         <div className="mt-16">
           <div className="flex flex-col items-center">
             <h5 className="text-sm text-gray-500 font-medium ">Enter using:</h5>
-            <div className="grid border-b   w-full grid-cols-3 gap-16 mt-8 ">
+            <div className="grid border-b   w-full grid-cols-2 gap-16 mt-8 ">
               <button
                 className={cls(
                   "pb-4 font-medium border-b-2 ",
@@ -47,59 +60,40 @@ const EnterPage: NextPage = (props: Props) => {
               >
                 Phone
               </button>
-              <button
-                className={cls(
-                  "pb-4 font-medium border-b-2 ",
-                  method === "board"
-                    ? "  border-orange-500 text-orange-400"
-                    : "border-transparent text-gray-500 "
-                )}
-                onClick={onBoardClick}
-              >
-                Board
-              </button>
             </div>
           </div>
-          <form className="flex flex-col mt-8">
+          <form onSubmit={handleSubmit(onValid)} className="flex flex-col mt-8">
             <label
               htmlFor="input"
               className="text-sm font-medium text-gray-700  "
             >
-              {method === "email" ? "Email address" : null}
-              {method === "phone" ? "Phone number" : null}
-              {method === "board" ? "Welcome to BoardPage" : null}
-            </label>
-            <div className="mt-1">
               {method === "email" ? (
-                <input
-                  id="input"
+                <Input
+                  register={register("email", { required: true })}
+                  name="email"
+                  label="Email address"
                   type="email"
-                  className="appearance-none w-full px-3 py-2 border border-gray-300 shadow-sm rounded-md placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500 "
                   required
                 />
               ) : null}
               {method === "phone" ? (
-                <div className="flex rounded-md shadow-sm ">
-                  <span className="flex items-center justify-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 select-none text-sm  ">
-                    +82
-                  </span>
-                  <input
-                    id="input"
-                    className="py-2 px-4 border border-transparent appearance-none w-full rounded-l-none border-gray-300 shadow-sm rounded-md placeholder-gray-400 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
-                    type="number"
-                    required
-                  />
-                </div>
+                <Input
+                  register={register("phone", { required: true })}
+                  name="phone"
+                  label="Phone number"
+                  type="number"
+                  kind="phone"
+                  required
+                />
               ) : null}
-              {method === "board" ? (
-                <div>
-                  <h1>Hello Eevery one</h1>
-                </div>
-              ) : null}
-            </div>
+            </label>
             <button className="mt-5 bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 border border-transparent rounded-md shadow-sm font-medium focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 focus:outline-none ">
-              {method === "email" ? "Get login link" : null}
-              {method === "phone" ? "Get one-time password" : null}
+              {method === "email" ? <Button text="Get login link" /> : null}
+              {method === "phone" ? (
+                <Button
+                  text={submittion ? "Loading" : "Get one-time password"}
+                />
+              ) : null}
             </button>
           </form>
           <div className="mt-8">

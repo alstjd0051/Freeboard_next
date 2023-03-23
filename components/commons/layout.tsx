@@ -1,7 +1,6 @@
 "use client";
 import { spawn } from "child_process";
 import React from "react";
-import { cls } from "./libs/utils";
 import Link from "next/link";
 import {
   ChatBubbleOvalLeftEllipsisIcon,
@@ -11,6 +10,7 @@ import {
   VideoCameraIcon,
 } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
+import { cls } from "./libs/client/utils";
 
 interface Props {
   title?: string;

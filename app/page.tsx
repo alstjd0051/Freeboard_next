@@ -6,6 +6,7 @@ import {
   ChatBubbleOvalLeftIcon,
   PlusIcon,
 } from "@heroicons/react/24/outline";
+
 export default function Home() {
   return (
     <Layout title="Home" hasTabBar>

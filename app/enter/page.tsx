@@ -1,4 +1,5 @@
 "use client";
+import { cls } from "@/components/commons/libs/utils";
 import { NextPage } from "next";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -9,10 +10,6 @@ interface EnterFormn {
   email?: string;
   phone?: string;
 }
-
-const cls = (...calssname: string[]) => {
-  return calssname.join(" ");
-};
 
 const EnterPage: NextPage = (props: Props) => {
   const { register } = useForm<EnterFormn>();

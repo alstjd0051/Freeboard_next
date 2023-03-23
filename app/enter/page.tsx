@@ -1,4 +1,5 @@
 "use client";
+
 import Button from "@/components/commons/items/button";
 import Input from "@/components/commons/items/input";
 import useMutation from "@/components/commons/libs/client/useMutation";
@@ -27,9 +28,10 @@ const EnterPage: NextPage = (props: Props) => {
     reset();
     setMethod("phone");
   };
-  const onValid = (data: EnterFormn) => {
-    enter(data);
+  const onValid = (validForm: EnterFormn) => {
+    enter(validForm);
   };
+  console.log(loading, data, error);
   return (
     <div className="h-screen  ">
       <div className="mt-16 px-4 w-1/2 mx-auto ">
@@ -87,14 +89,10 @@ const EnterPage: NextPage = (props: Props) => {
                 />
               ) : null}
             </label>
-            <button className="mt-5 bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 border border-transparent rounded-md shadow-sm font-medium focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 focus:outline-none ">
-              {method === "email" ? <Button text="Get login link" /> : null}
-              {method === "phone" ? (
-                <Button
-                  text={submittion ? "Loading" : "Get one-time password"}
-                />
-              ) : null}
-            </button>
+            {method === "email" ? <Button text="Get login link" /> : null}
+            {method === "phone" ? (
+              <Button text={submittion ? "Loading" : "Get one-time password"} />
+            ) : null}
           </form>
           <div className="mt-8">
             <div className="relative">

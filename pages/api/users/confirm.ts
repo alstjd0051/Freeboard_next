@@ -4,7 +4,14 @@ import withHandler, {
   ResponseType,
 } from "@/components/commons/libs/server/withHandler";
 import { client } from "@/components/commons/libs/server/client";
-import { isAwaitKeyword } from "typescript";
+
+declare module "iron-session" {
+  interface IronSessionData {
+    user?: {
+      id: number;
+    };
+  }
+}
 
 async function handler(
   req: NextApiRequest,
@@ -16,10 +23,10 @@ async function handler(
       payload: token,
     },
   });
-  if (!exists) res.status(404).end();
+  if (!exists) return res.status(404).end();
   console.log(exists);
   req.session.user = {
-    id: exists?.userId,
+    id: exists.userId,
   };
   await req.session.save();
   res.status(200).end();

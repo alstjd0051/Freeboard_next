@@ -3,6 +3,7 @@ import { spawn } from "child_process";
 import React from "react";
 import Link from "next/link";
 import {
+  BackwardIcon,
   ChatBubbleOvalLeftEllipsisIcon,
   HomeIcon,
   NewspaperIcon,
@@ -29,10 +30,12 @@ const Layout = ({ children, canGoBack, hasTabBar, title }: Props) => {
       <div
         className={cls(
           !canGoBack ? "justify-center" : "",
-          " bg-white w-full text-lg px-10 font-medium py-3 fixed text-gray-700 border-b top-0  flex items-center "
+          " bg-white h-12 w-full text-lg px-10 font-medium py-3 fixed text-gray-700 border-b top-0  flex items-center "
         )}
       >
-        {canGoBack ? <button onClick={onClick}>&larr;</button> : null}
+        <button onClick={onClick} className="absolute left-10">
+          <BackwardIcon className="w-7 h-7" />
+        </button>
         {title ? <span>{title}</span> : null}
       </div>
       <div className={cls("pt-14", hasTabBar ? "pb-16" : "")}>{children}</div>

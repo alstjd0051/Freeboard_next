@@ -5,7 +5,8 @@ import Input from "@/components/commons/items/input";
 import useMutation from "@/components/commons/libs/client/useMutation";
 import { cls } from "@/components/commons/libs/client/utils";
 import { NextPage } from "next";
-import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiFillGithub, AiOutlineTwitter } from "react-icons/ai";
 
@@ -52,6 +53,13 @@ const EnterPage: NextPage = (props: Props) => {
     if (tokenLoading) return;
     confirmToken(validForm);
   };
+  const router = useRouter();
+  useEffect(() => {
+    if (tokenData?.ok) {
+      router.push("/");
+    }
+  }, [tokenData, router]);
+
   return (
     <div className="h-screen  ">
       <div className="mt-16 px-4 w-1/2 mx-auto ">

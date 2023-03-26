@@ -1,15 +1,22 @@
 "use client";
 
 import Layout from "@/components/commons/layout";
+import useUser from "@/components/commons/libs/client/useUser";
 import {
   HeartIcon,
   ChatBubbleOvalLeftIcon,
   PlusIcon,
 } from "@heroicons/react/24/outline";
+import Head from "next/head";
 
 export default function Home() {
+  const user = useUser();
+  console.log(user);
   return (
     <Layout title="Home" hasTabBar>
+      <Head>
+        <title>Home</title>
+      </Head>
       <div className="flex flex-col space-y-5  ">
         {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((_, i) => (
           <div

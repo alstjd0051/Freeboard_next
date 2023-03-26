@@ -35,21 +35,21 @@ async function handler(
     },
   });
   if (phone) {
-    const message = await twilioClient.messages.create({
+    /* const message = await twilioClient.messages.create({
       messagingServiceSid: process.env.TWILIO_MSID,
       to: process.env.MY_PHONE!,
       body: `Your Login token is ${payload}`,
-    });
-    console.log(message);
+    }); */
+    // console.log(message);
   } else if (email) {
-    const email = await mail.send({
+    /* const email = await mail.send({
       from: "wsc7202@gmail.com",
       to: "wsc7202@gmail.com",
       subject: "당신의 이메일을 확인하시겠습니까?",
       text: `Your Token is ${payload}`,
       html: `<strong>Your Token is ${payload}</strong>`,
     });
-    console.log(email);
+    console.log(email); */
   }
   return res.json({
     ok: true,

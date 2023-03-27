@@ -1,4 +1,4 @@
-import { client } from "@/components/commons/libs/server/client";
+import client from "@/components/commons/libs/server/client";
 import withHandler, {
   ResponseType,
 } from "@/components/commons/libs/server/withHandler";

@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import withHandler, {
   ResponseType,
 } from "@/components/commons/libs/server/withHandler";
-import { client } from "@/components/commons/libs/server/client";
+import client from "@/components/commons/libs/server/client";
 import { withApiSession } from "@/components/commons/libs/server/withSession";
 
 async function handler(
@@ -25,15 +25,9 @@ async function handler(
       userId: foundToken.userId,
     },
   });
-
-  res.json({
-    ok: true,
-  });
+  res.json({ ok: true });
 }
 
 export default withApiSession(
-  withHandler({
-    method: "POST",
-    handler,
-  })
+  withHandler({ method: "POST", handler, isPrivate: false })
 );

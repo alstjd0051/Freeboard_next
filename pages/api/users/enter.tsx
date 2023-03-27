@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import withHandler, {
   ResponseType,
 } from "@/components/commons/libs/server/withHandler";
-import { client } from "@/components/commons/libs/server/client";
+import client from "@/components/commons/libs/server/client";
 import { isAwaitKeyword } from "typescript";
 
 const twilioClient = twilio(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);

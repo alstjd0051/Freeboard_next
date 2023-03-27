@@ -102,7 +102,7 @@ const Layout = ({ children, canGoBack, hasTabBar, title }: Props) => {
             <UserIcon
               className={cls(
                 "w-6 h-6",
-                pathName === "/"
+                pathName === "/profile"
                   ? "text-orange-500"
                   : "hover:text-gray-500 transition-colors"
               )}

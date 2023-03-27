@@ -10,7 +10,7 @@ import {
   UserIcon,
   VideoCameraIcon,
 } from "@heroicons/react/24/outline";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { cls } from "./libs/client/utils";
 
 interface Props {
@@ -25,50 +25,88 @@ const Layout = ({ children, canGoBack, hasTabBar, title }: Props) => {
   const onClick = () => {
     router.back();
   };
+  const pathName = usePathname();
+
   return (
     <div>
-      <div
-        className={cls(
-          !canGoBack ? "justify-center" : "",
-          " bg-white h-12 w-full text-lg px-10 font-medium py-3 fixed text-gray-700 border-b top-0  flex items-center "
-        )}
-      >
-        <button onClick={onClick} className="absolute left-10">
-          <BackwardIcon className="w-7 h-7" />
-        </button>
-        {title ? <span>{title}</span> : null}
+      <div className="bg-white w-full h-12  justify-center text-lg px-10 font-medium fixed text-gray-800 border-b top-0 flex items-center ">
+        {canGoBack ? (
+          <button onClick={onClick} className="absolute left-4">
+            <BackwardIcon className="w-6 fill-none stroke-current h-6" />
+          </button>
+        ) : null}
+        {title ? (
+          <span className={cls(canGoBack ? "mx-auto" : "", "")}>{title}</span>
+        ) : null}
       </div>
-      <div className={cls("pt-14", hasTabBar ? "pb-16" : "")}>{children}</div>
+      <div className={cls("pt-12", hasTabBar ? "pb-24" : "")}>{children}</div>
       {hasTabBar ? (
-        <nav className="bg-white  text-gray-700 border-t fixed bottom-0 w-full px-10  pb-5 pt-3 flex justify-between text-xs">
-          <Link href={"/"} className="flex flex-col items-center space-y-2">
-            <HomeIcon className="w-6 h-6 stroke-2" />
+        <nav className="bg-white w-full text-gray-700 border-t fixed bottom-0 px-10 pb-5 flex justify-between text-xs ">
+          <Link className="flex flex-col items-center space-y-2 " href={"/"}>
+            <HomeIcon
+              className={cls(
+                "w-6 h-6",
+                pathName === "/"
+                  ? "text-orange-500"
+                  : "hover:text-gray-500 transition-colors"
+              )}
+            />
             <span>홈</span>
           </Link>
           <Link
+            className="flex flex-col items-center space-y-2 "
             href={"/community"}
-            className="flex flex-col items-center space-y-2"
           >
-            <NewspaperIcon className="w-6 h-6 stroke-2" />
-            <span>동내생활</span>
+            <NewspaperIcon
+              className={cls(
+                "w-6 h-6",
+                pathName === "/community"
+                  ? "text-orange-500"
+                  : "hover:text-gray-500 transition-colors"
+              )}
+            />
+            <span>동네생활</span>
           </Link>
           <Link
+            className="flex flex-col items-center space-y-2 "
             href={"/chats"}
-            className="flex flex-col items-center space-y-2"
           >
-            <ChatBubbleOvalLeftEllipsisIcon className="w-6 h-6 stroke-2" />
-
+            <ChatBubbleOvalLeftEllipsisIcon
+              className={cls(
+                "w-6 h-6",
+                pathName === "/chats"
+                  ? "text-orange-500"
+                  : "hover:text-gray-500 transition-colors"
+              )}
+            />
             <span>채팅</span>
           </Link>
-          <Link href={"/live"} className="flex flex-col items-center space-y-2">
-            <VideoCameraIcon className="w-6 h-6 stroke-2" />
+          <Link
+            className="flex flex-col items-center space-y-2 "
+            href={"/live"}
+          >
+            <VideoCameraIcon
+              className={cls(
+                "w-6 h-6",
+                pathName === "/live"
+                  ? "text-orange-500"
+                  : "hover:text-gray-500 transition-colors"
+              )}
+            />
             <span>라이브</span>
           </Link>
           <Link
+            className="flex flex-col items-center space-y-2 "
             href={"/profile"}
-            className="flex flex-col items-center space-y-2"
           >
-            <UserIcon className="w-6 h-6 stroke-2" />
+            <UserIcon
+              className={cls(
+                "w-6 h-6",
+                pathName === "/"
+                  ? "text-orange-500"
+                  : "hover:text-gray-500 transition-colors"
+              )}
+            />
             <span>나의 캐럿</span>
           </Link>
         </nav>

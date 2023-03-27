@@ -8,10 +8,12 @@ import {
   PlusIcon,
 } from "@heroicons/react/24/outline";
 import Head from "next/head";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const { user, isLoading } = useUser();
   console.log(user);
+  const router = useRouter();
   return (
     <Layout title="Home" hasTabBar>
       <Head>
@@ -47,7 +49,10 @@ export default function Home() {
             </div>
           </div>
         ))}
-        <button className="fixed hover:bg-orange-500 transition-colors bottom-24 right-5 bg-orange-400 rounded-full p-4 shadow-xl text-white  ">
+        <button
+          onClick={() => router.push("/products/upload")}
+          className="fixed hover:bg-orange-500 transition-colors bottom-24 right-5 bg-orange-400 rounded-full p-4 shadow-xl text-white  "
+        >
           <PlusIcon className="w-4 h-4" />
         </button>
       </div>

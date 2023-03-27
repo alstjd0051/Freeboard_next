@@ -3,21 +3,27 @@ import Button from "@/components/commons/items/button";
 import Input from "@/components/commons/items/input";
 import TextArea from "@/components/commons/items/textarea";
 import Layout from "@/components/commons/layout";
+import useMutation from "@/components/commons/libs/client/useMutation";
 import type { NextPage } from "next";
 import { useForm } from "react-hook-form";
 import { TbPhotoPlus } from "react-icons/tb";
 
 interface UploadproductForm {
   name: string;
-  price: string;
+  price: number;
   description: string;
 }
 
 const Upload: NextPage = () => {
-  const { register } = useForm<UploadproductForm>();
+  const { register, handleSubmit } = useForm<UploadproductForm>();
+  const [uploadProduct, { loading, data }] = useMutation("/api/products");
+  const onValid = (data: UploadproductForm) => {
+    if (loading) return;
+    console.log(uploadProduct);
+  };
   return (
     <Layout canGoBack hasTabBar title="Upload Product">
-      <form className="p-4 space-y-4">
+      <form className="p-4 space-y-4" onSubmit={handleSubmit(onValid)}>
         <div>
           <label
             htmlFor=""
@@ -48,7 +54,7 @@ const Upload: NextPage = () => {
           label="Description"
           required
         />
-        <Button text="Upload item" />
+        <Button text={loading ? "loading" : "Upload item"} />
       </form>
     </Layout>
   );

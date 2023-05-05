@@ -1,7 +1,12 @@
-'use client'
+import FeaturePosts from "@/components/commons/items/FeaturePosts";
+import Hero from "@/components/units/hero";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className='bg-gray-500'>Main</div>
-  )
+    <section className="">
+      <Hero />
+      {/* @ts-expect-error Async Server Component */}
+      <FeaturePosts />
+    </section>
+  );
 }
